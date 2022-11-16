@@ -1,6 +1,8 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { MovieDetails } from '../components/MovieDetails';
 import { useMoviesDetails } from '../hooks/useMoviesDetails';
 import { RootStackParams } from '../navigation/Navigation';
@@ -11,7 +13,8 @@ interface DetailScreenProps extends StackScreenProps<RootStackParams, 'DetailScr
 
 const heigthScreen = Dimensions.get('screen').height
 
-export const DetailScreen = ({route}: DetailScreenProps) => {
+export const DetailScreen = ({route, navigation}: DetailScreenProps) => {
+
   const movie = route.params;
 
   const {isLoading, cast, movieFull} = useMoviesDetails(movie.id)
@@ -43,6 +46,15 @@ export const DetailScreen = ({route}: DetailScreenProps) => {
             ? <ActivityIndicator color='lightblue' style={{ marginTop: 20 }} size={40} />
             : <MovieDetails movieFull={movieFull!} cast={cast!}/>
         }
+      </View>
+      <View style={styles.backBottom}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon
+            name='arrow-back-outline'
+            color='grey'
+            size={30}
+          />
+        </TouchableOpacity>
       </View>
     </ScrollView>
   )
@@ -79,4 +91,25 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000'
   },
+  backBottom:{
+    position: 'absolute',
+    borderColor:'#cdcdcda0',
+    borderWidth: 1,
+    zIndex: 99,
+    elevation: 9,
+    top: 10,
+    left: 10,
+    backgroundColor:'white',
+    borderRadius: 100,
+    width: 34,
+    alignItems:'center',
+    justifyContent: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 4,
+    },
+    shadowOpacity: 0.24,
+    shadowRadius: 4.65,
+  }
 })
