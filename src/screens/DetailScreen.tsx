@@ -47,7 +47,7 @@ export const DetailScreen = ({route, navigation}: DetailScreenProps) => {
             : <MovieDetails movieFull={movieFull!} cast={cast!}/>
         }
       </View>
-      <View style={styles.backBottom}>
+      <View style={styles.backButtom}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon
             name='arrow-back-outline'
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000'
   },
-  backBottom:{
+  backButtom:{
     position: 'absolute',
     borderColor:'#cdcdcda0',
     borderWidth: 1,
